@@ -15,12 +15,14 @@ const RATIO_X=3.4
 const RATIO_Y=1.25;
 const OFFSET_Y=50;
 const OFFSET_Y_MSG=OFFSET_Y+40;
+
 const RATIO_WIDTH=0.9;
 const Width = Dimensions.get('window').width *RATIO_WIDTH;
 const Height = Dimensions.get('window').height *RATIO_WIDTH;
 const isVertical = Height > Width;
 const Top = isVertical ? (Height - Width)/2.0 * RATIO_Y : 10;
 const Radius = isVertical ? Width / 10 : Width / 25;
+const OFFSET_X=Width*(1-RATIO_WIDTH)/2;
 
 export default class GesturePassword extends Component {
     constructor(props) {
@@ -176,8 +178,8 @@ export default class GesturePassword extends Component {
     }
 
     onStart(e, g) {
-        let x = isVertical ? e.nativeEvent.pageX : e.nativeEvent.pageX - Width/RATIO_X;
-        let y = isVertical ? e.nativeEvent.pageY - Top/RATIO_Y-OFFSET_Y : e.nativeEvent.pageY - 30;
+        let x = isVertical ? e.nativeEvent.pageX -OFFSET_X: e.nativeEvent.pageX - Width/RATIO_X;
+        let y = isVertical ? e.nativeEvent.pageY - Top/RATIO_Y -OFFSET_Y_MSG : e.nativeEvent.pageY - 30;
 
         let lastChar = this.getTouchChar({x, y});
         if ( lastChar ) {
@@ -203,8 +205,8 @@ export default class GesturePassword extends Component {
     }
 
     onMove(e, g) {
-        let x = isVertical ? e.nativeEvent.pageX : e.nativeEvent.pageX - Width/RATIO_X;
-        let y = isVertical ? e.nativeEvent.pageY - Top/RATIO_Y-OFFSET_Y : e.nativeEvent.pageY - 30;
+        let x = isVertical ? e.nativeEvent.pageX -OFFSET_X: e.nativeEvent.pageX - Width/RATIO_X;
+        let y = isVertical ? e.nativeEvent.pageY - Top/RATIO_Y -OFFSET_Y_MSG: e.nativeEvent.pageY - 30;
 
         if ( this.isMoving ) {
             this.refs.line.setNativeProps({end: {x, y}});

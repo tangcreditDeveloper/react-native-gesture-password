@@ -1,5 +1,5 @@
 export function isPointInCircle(point, center, radius) {
-    let d = getDistance(point, center)-3;
+    let d = getDistance(point, center);
 
     return d <= radius;
 }
